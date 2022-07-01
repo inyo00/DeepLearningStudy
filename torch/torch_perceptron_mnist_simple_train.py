@@ -23,8 +23,8 @@ print("cudnn version:{}".format(torch.backends.cudnn.version()))
 
 
 # hyperparameters
-training_epochs = 100
-batch_size = 100
+training_epochs = 100#전체 데이터 셋을
+batch_size = 100#이미지를 한꺼번에 몇장을 넣어서 학습할것 인가? 1로하면 스토케스틱,
 learning_rate = 0.0001
 target_accuracy = 0.90
 
@@ -52,7 +52,7 @@ model = PerceptronSimpleMnist().to(device)
 # 비용 함수와 옵티마이저 정의
 loss_fn = nn.CrossEntropyLoss().to(device) # 내부적으로 소프트맥스 함수를 포함하고 있음. -ylog(h(x))
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
-
+#optimizer = optim.sgd(model.parameters(), lr=learning_rate)
 for epoch in range(training_epochs):  # 앞서 training_epochs의 값은 15로 지정함.
     avg_cost = 0
     avg_acc = 0
