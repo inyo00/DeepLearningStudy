@@ -25,14 +25,14 @@ if device == 'cuda':
 
 ## Hyper parameter
 training_epochs = 30
-batch_size = 20
+batch_size = 50
 target_accuracy = 0.99
 learning_rate = 0.0001
 accuracy_threshold = 0.5
 ## Hyper parameter
 
 
-model = Resnet18(class_num=4, activation=torch.nn.SiLU).to(device)
+model = Resnet18(class_num=4, activation=torch.nn.ReLU).to(device)
 print('==== model info ====')
 summary(model, (3, 224, 224))
 print('====================')
@@ -75,7 +75,7 @@ data_loader = DataLoader(datasets, batch_size=batch_size, shuffle=True)
 
 model.train()
 criterion = nn.BCELoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+optimizer = torch.optim.RAdam(model.parameters(), lr=learning_rate)
 
 
 for epoch in range(training_epochs): # 앞서 training_epochs의 값은 15로 지정함.
